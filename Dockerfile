@@ -20,9 +20,7 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM jenkinsci/slave
-MAINTAINER Nicolas De Loof <nicolas.deloof@gmail.com>
+FROM jenkinsci/jnlp-slave:2.62
+MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 
-COPY jenkins-slave /usr/local/bin/jenkins-slave
-
-ENTRYPOINT ["jenkins-slave"]
+RUN curl -sSL https://get.docker.com/ | sh
