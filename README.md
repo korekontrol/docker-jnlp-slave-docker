@@ -1,11 +1,12 @@
-# Jenkins JNLP Agent Docker image
+# Jenkins JNLP Agent Docker image with docker inside
 
-[![Docker Stars](https://img.shields.io/docker/stars/jenkinsci/jnlp-slave.svg)](https://hub.docker.com/r/jenkinsci/jnlp-slave/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/jenkinsci/jnlp-slave.svg)](https://hub.docker.com/r/jenkinsci/jnlp-slave/)
-[![Docker Automated build](https://img.shields.io/docker/automated/jenkinsci/jnlp-slave.svg)](https://hub.docker.com/r/jenkinsci/jnlp-slave/)
+[![Docker Stars](https://img.shields.io/docker/stars/korekontrol/jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/jnlp-slave-docker/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/korekontrol/jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/jnlp-slave-docker/)
+[![Docker Automated build](https://img.shields.io/docker/automated/korekontrol/jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/jnlp-slave-docker/)
 
 This is an image for [Jenkins](https://jenkins.io) agent (FKA "slave") using JNLP to establish connection.
 This agent is powered by the [Jenkins Remoting library](https://github.com/jenkinsci/remoting), which version is being taken from the base [Docker Agent](https://github.com/jenkinsci/docker-slave/) image.
+It includes docker installed locally for docker-inside-docker or docker-outside-docker scenario
 
 See [Jenkins Distributed builds](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds) for more info.
 
@@ -13,7 +14,7 @@ See [Jenkins Distributed builds](https://wiki.jenkins-ci.org/display/JENKINS/Dis
 
 To run a Docker container
 
-    docker run jenkinsci/jnlp-slave -url http://jenkins-server:port <secret> <agent name>
+    docker run korekontrol/jnlp-slave-docker -url http://jenkins-server:port <secret> <agent name>
 
 Optional environment variables:
 
