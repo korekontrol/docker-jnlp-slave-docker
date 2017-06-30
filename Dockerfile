@@ -20,7 +20,29 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
-FROM jenkinsci/jnlp-slave:2.62
+FROM openjdk:8-jdk
 MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 
+# Install docker inside docker
 RUN curl -sSL https://get.docker.com/ | sh
+
+# Jenkins
+ENV HOME /home/jenkins
+RUN groupadd -g 10000 jenkins
+RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 10000 -m jenkins
+LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar)" Vendor="Jenkins project" Version="3.7"
+
+ARG VERSION=3.7
+
+RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
+  && chmod 755 /usr/share/jenkins \
+  && chmod 644 /usr/share/jenkins/slave.jar
+
+USER jenkins
+RUN mkdir /home/jenkins/.jenkins
+VOLUME /home/jenkins/.jenkins
+WORKDIR /home/jenkins
+
+# jnlp slave
+COPY jenkins-slave /usr/local/bin/jenkins-slave
+ENTRYPOINT ["jenkins-slave"]
