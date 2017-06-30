@@ -1,8 +1,8 @@
 # Jenkins JNLP Agent Docker image with docker inside
 
-[![Docker Stars](https://img.shields.io/docker/stars/korekontrol/jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/jnlp-slave-docker/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/korekontrol/jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/jnlp-slave-docker/)
-[![Docker Automated build](https://img.shields.io/docker/automated/korekontrol/jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/jnlp-slave-docker/)
+[![Docker Stars](https://img.shields.io/docker/stars/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
+[![Docker Automated build](https://img.shields.io/docker/automated/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
 
 This is an image for [Jenkins](https://jenkins.io) agent (FKA "slave") using JNLP to establish connection.
 This agent is powered by the [Jenkins Remoting library](https://github.com/jenkinsci/remoting), which version is being taken from the base [Docker Agent](https://github.com/jenkinsci/docker-slave/) image.
@@ -23,6 +23,10 @@ Optional environment variables:
 * `JENKINS_SECRET`: agent secret, if not set as an argument
 * `JENKINS_AGENT_NAME`: agent name, if not set as an argument
 
+## Running docker inside docker
+If you want to use Jenkins in a container for building and running docker images, you must run docker inside docker. Two scenarios
+are possible - see: https://applatix.com/case-docker-docker-kubernetes-part/
+
 ## Configuration specifics
 
 ### Enabled JNLP protocols
@@ -37,3 +41,6 @@ If you use Jenkins `2.32.x LTS`, it is recommended to enable the protocol on you
 ### Amazon ECS
 
 Make sure your ECS container agent is [updated](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html) before running. Older versions do not properly handle the entryPoint parameter. See the [entryPoint](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions) definition for more information.
+
+## Credits
+Created by [Marek Obuchowicz](https://github.com/marek-obuchowicz) from [KoreKontrol](https://www.korekontrol.eu/)
