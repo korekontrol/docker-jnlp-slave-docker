@@ -23,14 +23,18 @@
 FROM openjdk:8-jdk
 MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 
-# Install docker inside docker
+# Install docker client
 RUN curl -sSL https://get.docker.com/ | sh
+
+# Tini
+ADD https://github.com/krallin/tini/releases/download/v0.15.0/tini /tini
+RUN chmod +x /tini
 
 # Jenkins
 ENV HOME /home/jenkins
-RUN groupadd -g 10000 jenkins
-RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 10000 -m jenkins
-LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar)" Vendor="Jenkins project" Version="3.7"
+RUN groupadd -g 999 docker
+RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
+LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and docker client" Vendor="KoreKontrol" Version="3.7"
 
 ARG VERSION=3.7
 
@@ -45,4 +49,4 @@ WORKDIR /home/jenkins
 
 # jnlp slave
 COPY jenkins-slave /usr/local/bin/jenkins-slave
-ENTRYPOINT ["jenkins-slave"]
+ENTRYPOINT ["/tini", "--", "jenkins-slave"]
