@@ -32,7 +32,6 @@ RUN chmod +x /tini
 
 # Jenkins
 ENV HOME /home/jenkins
-RUN groupadd -g 999 docker
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
 LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and docker client" Vendor="KoreKontrol" Version="3.7"
 
