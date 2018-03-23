@@ -30,6 +30,13 @@ RUN curl -sSL https://get.docker.com/ | sh
 ADD https://github.com/krallin/tini/releases/download/v0.15.0/tini /tini
 RUN chmod +x /tini
 
+# AWSCLI
+RUN apt-get update -qy && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy python-pip groff-base && \
+    pip install awscli && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Jenkins
 ENV HOME /home/jenkins
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
