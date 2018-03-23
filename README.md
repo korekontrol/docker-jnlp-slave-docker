@@ -7,7 +7,9 @@
 This is an image for [Jenkins](https://jenkins.io) agent (FKA "slave") using JNLP to establish connection.
 This agent is powered by the [Jenkins Remoting library](https://github.com/jenkinsci/remoting), which version is being taken from the base [Docker Agent](https://github.com/jenkinsci/docker-slave/) image.
 
-It includes docker installed locally for docker-inside-docker or docker-outside-docker scenario.
+It includes addionally to original image:
+* `docker` installed locally for docker-inside-docker or docker-outside-docker scenario
+* `awscli` installed via python-pip
 
 See [Jenkins Distributed builds](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds) for more info.
 
@@ -29,7 +31,6 @@ If you want to use Jenkins in a container for building and running docker images
 are possible - see: https://applatix.com/case-docker-docker-kubernetes-part/
 
 ## Configuration specifics
-
 ### Enabled JNLP protocols
 
 By default, the [JNLP3-connect](https://github.com/jenkinsci/remoting/blob/master/docs/protocols.md#jnlp3-connect) is disabled due to the known stability and scalability issues.
@@ -40,8 +41,10 @@ In Jenkins versions starting from `2.27` there is a [JNLP4-connect](https://gith
 If you use Jenkins `2.32.x LTS`, it is recommended to enable the protocol on your instance.
 
 ### Amazon ECS
-
 Make sure your ECS container agent is [updated](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html) before running. Older versions do not properly handle the entryPoint parameter. See the [entryPoint](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions) definition for more information.
 
 ## Credits
-Created by [Marek Obuchowicz](https://github.com/marek-obuchowicz) from [KoreKontrol](https://www.korekontrol.eu/)
+Created by [Marek Obuchowicz](https://github.com/marek-obuchowicz) from [KoreKontrol - kubernetes consulting](https://www.korekontrol.eu/)
+
+## License
+[MIT](LICENSE)
