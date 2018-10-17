@@ -4,12 +4,15 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
 [![Docker Automated build](https://img.shields.io/docker/automated/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
 
-This is an image for [Jenkins](https://jenkins.io) agent (FKA "slave") using JNLP to establish connection.
+This is an image for [Jenkins](https://jenkins.io) agent (FKA "slave"/"worker") using JNLP to establish connection.
 This agent is powered by the [Jenkins Remoting library](https://github.com/jenkinsci/remoting), which version is being taken from the base [Docker Agent](https://github.com/jenkinsci/docker-slave/) image.
 
-It includes addionally to original image:
+It includes addionally to original image tools useful on CI/CD workers:
 * `docker` installed locally for docker-inside-docker or docker-outside-docker scenario
-* `awscli` installed via python-pip
+* `awscli`
+* `j2cli`
+* `kubectl`
+* `helm`
 
 See [Jenkins Distributed builds](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds) for more info.
 
@@ -27,8 +30,9 @@ Optional environment variables:
 * `JENKINS_AGENT_NAME`: agent name, if not set as an argument
 
 ## Running docker inside docker
-If you want to use Jenkins in a container for building and running docker images, you must run docker inside docker. Two scenarios
+If you want to use Jenkins in a container for building and running docker images, you must run docker inside/outside docker. Two scenarios
 are possible - see: https://applatix.com/case-docker-docker-kubernetes-part/
+Docker outside docker seems very slow...
 
 ## Configuration specifics
 ### Enabled JNLP protocols
