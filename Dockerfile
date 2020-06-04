@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM openjdk:8-jre-slim-buster
 MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 
 # Tini
