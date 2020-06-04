@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 
 # Tini
-ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini /tini
+ADD https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
 RUN chmod +x /tini
 
 # Install docker client, kubectl and helm
@@ -13,7 +13,8 @@ RUN curl -sSL https://get.docker.com/ | sh && \
     rm -f get_helm.sh && \
     curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod 755 kubectl && \
-    mv kubectl /usr/local/bin/kubectl
+    mv kubectl /usr/local/bin/kubectl && \
+    rm -rf /var/lib/apt/lists/*
 
 # Debian packages
 RUN apt-get update -qy && \
@@ -30,7 +31,7 @@ ENV HOME /home/jenkins
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
 LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and tools: j2cli, awscli, docker client, kubectl and helm" Vendor="KoreKontrol" Version="3.27"
 
-ARG VERSION=3.27
+ARG VERSION=3.40.1
 
 RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
