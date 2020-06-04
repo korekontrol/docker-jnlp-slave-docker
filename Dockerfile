@@ -5,6 +5,12 @@ MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 ADD https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
 RUN chmod +x /tini
 
+# Debian packages
+RUN apt-get update -qy && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy python-pip groff-base curl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install docker client, kubectl and helm
 RUN curl -sSL https://get.docker.com/ | sh && \
     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh && \
@@ -14,12 +20,6 @@ RUN curl -sSL https://get.docker.com/ | sh && \
     curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod 755 kubectl && \
     mv kubectl /usr/local/bin/kubectl && \
-    rm -rf /var/lib/apt/lists/*
-
-# Debian packages
-RUN apt-get update -qy && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy python-pip groff-base && \
-    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # AWS CLI, j2cli
