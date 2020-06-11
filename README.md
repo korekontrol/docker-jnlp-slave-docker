@@ -10,6 +10,7 @@ This agent is powered by the [Jenkins Remoting library](https://github.com/jenki
 It includes addionally to original image tools useful on CI/CD workers:
 * `docker` installed locally for docker-inside-docker or docker-outside-docker scenario
 * `awscli`
+* `docker-compose`
 * `j2cli`
 * `kubectl`
 * `helm`

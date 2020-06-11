@@ -1,5 +1,4 @@
 FROM openjdk:8-jre-slim-buster
-MAINTAINER Marek Obuchowicz <marek@korekontrol.eu>
 
 # Tini
 ADD https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
@@ -7,12 +6,13 @@ RUN chmod +x /tini
 
 # Debian packages
 RUN apt-get update -qy && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy python-pip groff-base curl && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy --no-install-recommends apt-utils curl groff-base python3-pip python3-setuptools && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Install docker client, kubectl and helm
-RUN curl -sSL https://get.docker.com/ | sh && \
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    curl -sSL https://get.docker.com/ | sh && \
     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh && \
     chmod 700 get_helm.sh && \
     ./get_helm.sh && \
@@ -22,14 +22,15 @@ RUN curl -sSL https://get.docker.com/ | sh && \
     mv kubectl /usr/local/bin/kubectl && \
     rm -rf /var/lib/apt/lists/*
 
-# AWS CLI, j2cli
-RUN pip install awscli && \
-    pip install j2cli
+# AWS CLI, j2cli, docker-compose
+RUN pip3 install awscli && \
+    pip3 install j2cli && \
+    pip3 install docker-compose
 
 # Jenkins
 ENV HOME /home/jenkins
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
-LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and tools: j2cli, awscli, docker client, kubectl and helm" Vendor="KoreKontrol" Version="3.27"
+LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and tools: j2cli, awscli, docker client, docker-compose, kubectl and helm" Vendor="KoreKontrol" Version="3.27"
 
 ARG VERSION=4.2.1
 
