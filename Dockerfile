@@ -6,13 +6,24 @@ RUN chmod +x /tini
 
 # Debian packages
 RUN apt-get update -qy && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -qy --no-install-recommends apt-utils curl groff-base python3-pip python3-setuptools && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -qy --no-install-recommends \
+      apt-utils \
+      bzip2 \
+      curl \
+      git \
+      groff-base \
+      gawk \
+      make \
+      python3-pip \
+      python3-setuptools \
+      zip \
+      && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Install docker client, kubectl and helm
 RUN export DEBIAN_FRONTEND=noninteractive && \
-    curl -sSL https://get.docker.com/ | sh && \
+    curl -sSL https://get.docker.com/ | sh && exit 1 && \
     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get > get_helm.sh && \
     chmod 700 get_helm.sh && \
     ./get_helm.sh && \
