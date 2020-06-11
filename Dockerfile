@@ -7,7 +7,6 @@ RUN chmod +x /tini
 # Debian packages
 RUN apt-get update -qy && \
     DEBIAN_FRONTEND=noninteractive apt-get install -qy --no-install-recommends \
-      apt-utils \
       bzip2 \
       curl \
       git \
