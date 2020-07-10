@@ -13,6 +13,7 @@ RUN apt-get update -qy && \
       groff-base \
       gawk \
       make \
+      openssh-client \
       python3-pip \
       python3-setuptools \
       zip \
@@ -42,7 +43,7 @@ ENV HOME /home/jenkins
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
 LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and tools: j2cli, awscli, docker client, docker-compose, kubectl and helm" Vendor="KoreKontrol" Version="3.27"
 
-ARG VERSION=4.2.1
+ARG VERSION=4.5
 
 RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
   && chmod 755 /usr/share/jenkins \
