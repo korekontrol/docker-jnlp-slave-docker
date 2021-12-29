@@ -36,10 +36,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 # AWS CLI, j2cli, docker-compose
 RUN pip3 install awscli && \
     pip3 install j2cli && \
-    pip3 install docker-compose
+    pip3 install docker-compose~=1.23.2
 
 # Jenkins
 ENV HOME /home/jenkins
+RUN groupadd -g 998 jenkins
 RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 998 -m jenkins
 LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and tools: j2cli, awscli, docker client, docker-compose, kubectl and helm" Vendor="KoreKontrol" Version="3.27"
 
