@@ -40,7 +40,7 @@ RUN pip3 install awscli && \
 
 # Jenkins
 ENV HOME /home/jenkins
-RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 999 -m jenkins
+RUN useradd -c "Jenkins user" -d $HOME -u 10000 -g 998 -m jenkins
 LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar) and tools: j2cli, awscli, docker client, docker-compose, kubectl and helm" Vendor="KoreKontrol" Version="3.27"
 
 ARG VERSION=4.5
