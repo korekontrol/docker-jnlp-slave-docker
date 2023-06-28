@@ -1,5 +1,11 @@
 # Jenkins JNLP Agent Docker image with docker inside
 
+# Changelog
+r10 - upgraded jre to 11
+r9  - [cancelled]
+r8  - 
+
+
 [![Docker Stars](https://img.shields.io/docker/stars/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
 [![Docker Automated build](https://img.shields.io/docker/automated/korekontrol/docker-jnlp-slave-docker.svg)](https://hub.docker.com/r/korekontrol/docker-jnlp-slave-docker/)
