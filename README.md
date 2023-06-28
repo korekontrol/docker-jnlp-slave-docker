@@ -1,7 +1,7 @@
 # Jenkins JNLP Agent Docker image with docker inside
 
 # Changelog
-r10 - upgraded jre to 11
+r10 - JRE 11, Agent 4.7
 r9  - [cancelled]
 r8  - 
 
