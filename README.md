@@ -14,6 +14,7 @@ It includes addionally to original image tools useful on CI/CD workers:
 * `j2cli`
 * `kubectl`
 * `helm`
+* `nerdctl`
 
 See [Jenkins Distributed builds](https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds) for more info.
 
